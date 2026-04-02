@@ -11,4 +11,5 @@ fi
 
 cd "$name"
 zip -r "$name.zip" . -x "bin/*" "obj/*"
-mv "$name.zip" ..
+mv "$name.zip" "../archives/$name-TORRES.zip"
+echo "Zip created successfully: ../archives/$name-TORRES.zip"
