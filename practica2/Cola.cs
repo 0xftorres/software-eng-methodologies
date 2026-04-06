@@ -1,37 +1,42 @@
 namespace practica2;
 
-public class Conjunto : IColeccionable, IIterable
+using System.Collections.Generic;
+
+
+public class Cola : IColeccionable, IIterable
 {
     private List<IComparable> datos = new List<IComparable>();
 
     public IIterador CrearIterador()
     {
-        return new IteradorConjunto(datos);
+        return new IteradorCola(datos);
     }
 
-    private IComparable buscar(IComparable c)
+    public void encolar(IComparable elem)
     {
-        foreach (IComparable dato in datos)
-        {
-            if (dato.sosIgual(c))
-            {
-                return dato;
-            }
-        }
-        return null;
+        this.datos.Add(elem);
     }
 
-    public bool pertenece(IComparable c)
+    public IComparable desencolar()
     {
-        return this.buscar(c) != null;
+        IComparable temp = this.datos[0];
+        this.datos.RemoveAt(0);
+        return temp;
     }
 
-    public void agregar(IComparable elem)
+    public IComparable tope()
     {
-        if (this.buscar(elem) == null)
-        {
-            this.datos.Add(elem);
-        }
+        return this.datos[0];
+    }
+
+    public bool esVacia()
+    {
+        return this.datos.Count == 0;
+    }
+
+    public int cantidadElementos()
+    {
+        return this.datos.Count;
     }
 
     public int cuantos()
@@ -49,7 +54,7 @@ public class Conjunto : IColeccionable, IIterable
 
     public IComparable minimo()
     {
-        IComparable min = this.datos[0];
+        IComparable min = this.tope();
         foreach (IComparable dato in datos)
         {
             if (dato.sosMenor(min))
@@ -62,7 +67,7 @@ public class Conjunto : IColeccionable, IIterable
 
     public IComparable maximo()
     {
-        IComparable max = this.datos[0];
+        IComparable max = this.tope();
         foreach (IComparable dato in datos)
         {
             if (dato.sosMayor(max))
@@ -71,6 +76,11 @@ public class Conjunto : IColeccionable, IIterable
             }
         }
         return max;
+    }
+
+    public void agregar(IComparable c)
+    {
+        this.encolar(c);
     }
 
     public bool contiene(IComparable c)

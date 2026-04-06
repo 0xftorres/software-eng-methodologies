@@ -54,3 +54,31 @@ public class ComparacionPorPromedio : IComparable
         return promedio < otro_alumno.getPromedio();
     }
 }
+
+public class ComparacionPorDni : IComparable
+{
+
+    public int dni;
+    public ComparacionPorDni(int dni)
+    {
+        this.dni = dni;
+    }
+
+    public bool sosIgual(IComparable c)
+    {
+        Alumno otro_alumno = (Alumno)c;
+        return dni == otro_alumno.getDNI();
+    }
+
+    public bool sosMayor(IComparable c)
+    {
+        Alumno otro_alumno = (Alumno)c;
+        return dni > otro_alumno.getDNI();
+    }
+
+    public bool sosMenor(IComparable c)
+    {
+        Alumno otro_alumno = (Alumno)c;
+        return dni < otro_alumno.getDNI();
+    }
+}
