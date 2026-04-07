@@ -1,5 +1,9 @@
 ﻿namespace practica3;
 
+// Ejercicio 7: Habría que crear una fábrica de
+// coleccionables, y una fabrica para cada
+// coleccionable mencionado (Pila, cola, etc.)
+
 class Program
 {
     public static void Main(string[] args)
