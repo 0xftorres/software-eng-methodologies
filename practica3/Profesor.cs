@@ -41,14 +41,14 @@ public class Profesor: Persona, IObservado
 
     public void hablarALaClase()
     {
-        Console.WriteLine("Hablando de algun tema...");
+        Console.WriteLine("\nHablando de algun tema...");
         accion.setValor("hablando");
         notificar();
     }
 
     public void escribirEnElPizarron()
     {
-        Console.WriteLine("Escribiendo en el pizarron...");
+        Console.WriteLine("\nEscribiendo en el pizarron...");
         accion.setValor("escribiendo");
         notificar();
     }

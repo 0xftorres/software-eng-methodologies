@@ -17,6 +17,23 @@ class Program
 
         llenar(p, "profesor");
         informar(p, "profesor");
+        
+        Profesor profesor = new Profesor("Fede", 12348775, 15);
+        for(int i = 1; i <= 20; i++)
+        {
+            Alumno alumno = (Alumno)FabricaDeComparables.crearAleatorio("alumno");
+            profesor.agregarObservador(alumno);
+        }
+        dictadoDeClases(profesor);
+    }
+
+    public static void dictadoDeClases(Profesor profesor)
+    {
+        for(int i = 1; i <= 5; i++)
+        {
+            profesor.hablarALaClase();
+            profesor.escribirEnElPizarron();
+        }
     }
 
     public static void llenar(IColeccionable c, string opcion)

@@ -1,6 +1,6 @@
 namespace practica3;
 
-public class Alumno: Persona
+public class Alumno: Persona, IObservador
 {
     public Numero legajo;
     public Numero promedio;
@@ -37,7 +37,7 @@ public class Alumno: Persona
 
     public void prestarAtencion()
     {
-        Console.WriteLine("Alumno {0}: Prestando atencion...", nombre.getValor());
+        Console.WriteLine("Alumno {0} (legajo: {1}): Prestando atencion...", nombre.getValor(), legajo.getValor());
     }
 
     public void distraerse()
@@ -45,7 +45,7 @@ public class Alumno: Persona
         string[] distracciones = {"Mirando el celular", "Dibujando en el margen de la carpeta", "Tirando aviones de papel"};
         Random rand = new Random();
         int i = rand.Next(distracciones.Length);
-        Console.WriteLine("Alumno {0}: {1}", nombre.getValor(), distracciones[i]);
+        Console.WriteLine("Alumno {0} (legajo: {1}): {2}", nombre.getValor(), legajo.getValor(), distracciones[i]);
     }
 
     public void setEstrategia(IComparable e)
