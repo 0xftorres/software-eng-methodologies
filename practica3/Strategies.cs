@@ -82,3 +82,31 @@ public class ComparacionPorDni : IComparable
         return dni.getValor() < otro_alumno.getDNI().getValor();
     }
 }
+
+public class ComparacionPorAntiguedad : IComparable
+{
+
+    public Numero antiguedad;
+    public ComparacionPorAntiguedad(int antiguedad)
+    {
+        this.antiguedad = new Numero(antiguedad);
+    }
+
+    public bool sosIgual(IComparable c)
+    {
+        Profesor otro_profesor = (Profesor)c;
+        return antiguedad.getValor() == otro_profesor.getAntiguedad().getValor();
+    }
+
+    public bool sosMayor(IComparable c)
+    {
+        Profesor otro_profesor = (Profesor)c;
+        return antiguedad.getValor() > otro_profesor.getAntiguedad().getValor();
+    }
+
+    public bool sosMenor(IComparable c)
+    {
+        Profesor otro_profesor = (Profesor)c;
+        return antiguedad.getValor() < otro_profesor.getAntiguedad().getValor();
+    }
+}

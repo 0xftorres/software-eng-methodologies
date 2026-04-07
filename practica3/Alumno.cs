@@ -17,6 +17,37 @@ public class Alumno: Persona
         estrategia = new ComparacionPorDni(dni.getValor());
     }
 
+    public void actualizar(IObservado o)
+    {
+        Profesor p = (Profesor)o;
+        if (p.getAccion().getValor() == "hablando")
+        {
+            prestarAtencion();
+        }
+        else if(p.getAccion().getValor() == "escribiendo")
+        {
+            distraerse();
+        }
+        else
+        {
+            // Ante la duda se distrae
+            distraerse();
+        }
+    }
+
+    public void prestarAtencion()
+    {
+        Console.WriteLine("Alumno {0}: Prestando atencion...", nombre.getValor());
+    }
+
+    public void distraerse()
+    {
+        string[] distracciones = {"Mirando el celular", "Dibujando en el margen de la carpeta", "Tirando aviones de papel"};
+        Random rand = new Random();
+        int i = rand.Next(distracciones.Length);
+        Console.WriteLine("Alumno {0}: {1}", nombre.getValor(), distracciones[i]);
+    }
+
     public void setEstrategia(IComparable e)
     {
         estrategia = e;

@@ -14,6 +14,11 @@ public class Cadena: IComparable
         return valor;
     }
 
+    public void setValor(string v)
+    {
+        valor = v;
+    }
+
     public bool sosIgual(IComparable c)
     {
         Cadena otra_cadena = (Cadena)c;

@@ -4,25 +4,27 @@
 // coleccionables, y una fabrica para cada
 // coleccionable mencionado (Pila, cola, etc.)
 
+// Ejercicio 10: Habría que crear una fabrica de Personas.
+
 class Program
 {
     public static void Main(string[] args)
     {
         Pila p = new Pila();
 
-        llenar(p, "alumno");
-        informar(p, "alumno");
-        
+        //llenar(p, "alumno");
+        //informar(p, "alumno");
 
+        llenar(p, "profesor");
+        informar(p, "profesor");
     }
 
     public static void llenar(IColeccionable c, string opcion)
     {
         for(int i = 0; i < 20; i++)
         {
-            FabricaDeComparables fabAlumnos = new FabricaDeAlumnos();
-            IComparable al = fabAlumnos.crearAleatorio();
-            c.agregar(al);
+            IComparable fabricado = FabricaDeComparables.crearAleatorio(opcion);
+            c.agregar(fabricado);
         }
     }
 
