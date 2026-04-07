@@ -4,7 +4,7 @@ public abstract class FabricaDeComparables
 {
     public FabricaDeComparables() {}
 
-    public abstract IComparable crearAleatorio(string tipo);
+    public abstract IComparable crearAleatorio();
 
     public static IComparable crearAleatorio(string tipo)
     {
@@ -19,27 +19,28 @@ public abstract class FabricaDeComparables
         } else if (tipo == "nombre") {
             return gen.stringAleatorio(7);
         }
-
+        
         return new Numero(0);
     }
 
     public static IComparable crearAleatorioPreseteado()
     {
-        return new gen.numeroAleatorio(99999999);
+        GeneradorDeDatosAleatorios gen = new GeneradorDeDatosAleatorios();
+        return gen.numeroAleatorio(99999999);
     }
 
-    public static string crearPorTeclado(string tipo)
+    public static IComparable crearPorTeclado(string tipo)
     {
         LectorDeDatos lector = new LectorDeDatos();
 
         if (tipo == "dni") {
-            return lector.numeroPorTeclado();
+            return new Numero(lector.numeroPorTeclado());
         } else if (tipo == "legajo") {
-            return lector.numeroPorTeclado();
+            return new Numero(lector.numeroPorTeclado());
         } else if (tipo == "promedio") {
-            return lector.numeroPorTeclado();
+            return new Numero(lector.numeroPorTeclado());
         } else if (tipo == "nombre") {
-            return lector.stringPorTeclado();
+            return new Cadena(lector.stringPorTeclado());
         }
 
         return new Numero(0);

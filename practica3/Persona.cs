@@ -1,21 +1,21 @@
-namespace practica2;
+namespace practica3;
 
 public abstract class Persona : IComparable
 {
-    public string nombre;
-    public int dni;
+    public Cadena nombre;
+    public Numero dni;
 
     public Persona(string n, int d){
-        dni = d;
-        nombre = n;
+        dni = new Numero(d);
+        nombre = new Cadena(n);
     }
 
-    public string getNombre()
+    public Cadena getNombre()
     {
         return nombre;
     }
 
-    public int getDNI()
+    public Numero getDNI()
     {
         return dni;
     }
@@ -23,19 +23,19 @@ public abstract class Persona : IComparable
     public virtual bool sosIgual(IComparable c)
     {
         Alumno otro_alumno = (Alumno)c;
-        return dni == otro_alumno.getDNI();
+        return dni.getValor() == otro_alumno.getDNI().getValor();
     }
 
     public virtual bool sosMayor(IComparable c)
     {
         Alumno otro_alumno = (Alumno)c;
-        return dni > otro_alumno.getDNI();
+        return dni.getValor() > otro_alumno.getDNI().getValor();
     }
 
     public virtual bool sosMenor(IComparable c)
     {
         Alumno otro_alumno = (Alumno)c;
-        return dni < otro_alumno.getDNI();
+        return dni.getValor() < otro_alumno.getDNI().getValor();
     }
 
     public virtual string ToString()

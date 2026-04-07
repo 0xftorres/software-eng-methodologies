@@ -10,11 +10,11 @@ public class GeneradorDeDatosAleatorios
         return new Numero(random.Next(0, max));
     }
 
-    public string stringAleatorio(int cant)
+    public Cadena stringAleatorio(int cant)
     {
         string chars = "abcdefghijklmnopqrstuvwxyz";
         Random random = new Random();
-        return new string(Enumerable.Repeat(chars, cant)
-          .Select(s => s[random.Next(s.Length)]).ToArray());
+        string r = new string(Enumerable.Repeat(chars, cant).Select(s => s[random.Next(s.Length)]).ToArray());
+        return new Cadena(r);
     }
 }

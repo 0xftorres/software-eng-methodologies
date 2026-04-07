@@ -4,10 +4,16 @@ public class FabricaDeAlumnos: FabricaDeComparables
 {
     public FabricaDeAlumnos() {}
 
-    public override Alumno crearAleatorio()
+    public override IComparable crearAleatorio()
     {
         GeneradorDeDatosAleatorios gen = new GeneradorDeDatosAleatorios();
-        Alumno al = new Alumno(crearAleatorio("nombre"), crearAleatorio("dni"), crearAleatorio("legajo"), crearAleatorio("promedio"));
+
+        Cadena nombre_alumno = (Cadena)crearAleatorio("nombre");
+        Numero dni_alumno = (Numero)crearAleatorio("dni");
+        Numero legajo_alumno = (Numero)crearAleatorio("legajo");
+        Numero promedio_alumno = (Numero)crearAleatorio("promedio");
+
+        IComparable al = new Alumno(nombre_alumno.getValor(), dni_alumno.getValor(), legajo_alumno.getValor(), promedio_alumno.getValor());
         return al;
     }
 }

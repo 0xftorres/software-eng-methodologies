@@ -1,19 +1,19 @@
-namespace practica2;
+namespace practica3;
 
 public class Alumno: Persona
 {
-    public int legajo;
-    public int promedio;
+    public Numero legajo;
+    public Numero promedio;
     public IComparable estrategia;
 
     public Alumno(string n, int d, int l, int p): base(n,d)
     {
-        nombre = n;
-        dni = d;
-        legajo = l;
-        promedio = p;
+        nombre = new Cadena(n);
+        dni = new Numero(d);
+        legajo = new Numero(l);
+        promedio = new Numero(p);
 
-        estrategia = new ComparacionPorDni(dni);
+        estrategia = new ComparacionPorDni(dni.getValor());
     }
 
     public void setEstrategia(IComparable e)
@@ -21,12 +21,12 @@ public class Alumno: Persona
         estrategia = e;
     }
 
-    public int getLegajo()
+    public Numero getLegajo()
     {
         return legajo;
     }
 
-    public int getPromedio()
+    public Numero getPromedio()
     {
         return promedio;
     }

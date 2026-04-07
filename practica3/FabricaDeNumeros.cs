@@ -4,8 +4,8 @@ public class FabricaDeNumeros: FabricaDeComparables
 {
     public FabricaDeNumeros() {}
 
-    public override Numero crearAleatorio()
+    public override IComparable crearAleatorio()
     {
-        return (Numero)this.crearAleatorioPreseteado();
+        return (Numero)crearAleatorioPreseteado();
     }
 }

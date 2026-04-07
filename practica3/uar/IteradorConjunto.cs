@@ -1,4 +1,4 @@
-namespace practica2;
+namespace practica3;
 
 public class IteradorConjunto : IIterador
 {
