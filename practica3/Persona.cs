@@ -38,8 +38,8 @@ public abstract class Persona : IComparable
         return dni.getValor() < otro_alumno.getDNI().getValor();
     }
 
-    public virtual string ToString()
+    public override string ToString()
     {
-        return "Nombre: " + nombre + ", DNI: " + dni;
+        return "Nombre: " + nombre.getValor() + ", DNI: " + dni.getValor();
     }
 }

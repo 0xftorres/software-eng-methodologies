@@ -2,47 +2,44 @@ namespace practica3;
 
 public abstract class FabricaDeComparables
 {
-    public FabricaDeComparables() {}
 
     public abstract IComparable crearAleatorio();
+    public abstract IComparable crearPorTeclado();
 
     public static IComparable crearAleatorio(string tipo)
     {
-        GeneradorDeDatosAleatorios gen = new GeneradorDeDatosAleatorios();
+        FabricaDeComparables fab = null;
 
-        if (tipo == "dni") {
-            return gen.numeroAleatorio(99999999);
-        } else if (tipo == "legajo") {
-            return gen.numeroAleatorio(9999);
-        } else if (tipo == "promedio") {
-            return gen.numeroAleatorio(10);
-        } else if (tipo == "nombre") {
-            return gen.stringAleatorio(7);
+        if(tipo=="alumno") {
+            fab = new FabricaDeAlumnos();
+        } else if (tipo == "numero") {
+            fab = new FabricaDeNumeros();
+        } else {
+            return null;
         }
-        
-        return new Numero(0);
+
+        return fab.crearAleatorio();
     }
 
+    /*
     public static IComparable crearAleatorioPreseteado()
     {
         GeneradorDeDatosAleatorios gen = new GeneradorDeDatosAleatorios();
         return gen.numeroAleatorio(99999999);
-    }
+    }*/
 
     public static IComparable crearPorTeclado(string tipo)
     {
-        LectorDeDatos lector = new LectorDeDatos();
-
-        if (tipo == "dni") {
-            return new Numero(lector.numeroPorTeclado());
-        } else if (tipo == "legajo") {
-            return new Numero(lector.numeroPorTeclado());
-        } else if (tipo == "promedio") {
-            return new Numero(lector.numeroPorTeclado());
-        } else if (tipo == "nombre") {
-            return new Cadena(lector.stringPorTeclado());
+        FabricaDeComparables fab = null;
+        
+        if (tipo=="alumno") {
+            fab = new FabricaDeAlumnos();
+        } else if (tipo == "numero") {
+            fab = new FabricaDeNumeros();
+        } else {
+            return null;
         }
 
-        return new Numero(0);
+        return fab.crearPorTeclado();
     }
 }

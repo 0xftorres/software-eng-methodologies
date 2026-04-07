@@ -13,6 +13,7 @@ public class Alumno: Persona
         legajo = new Numero(l);
         promedio = new Numero(p);
 
+        // Por default es por DNI
         estrategia = new ComparacionPorDni(dni.getValor());
     }
 
@@ -52,6 +53,6 @@ public class Alumno: Persona
 
     public override string ToString()
     {
-        return "Nombre: " + nombre + ", DNI: " + dni + ", Legajo: " + legajo + ", Promedio: " + promedio;
+        return "Nombre: " + nombre.getValor() + ", DNI: " + dni.getValor() + ", Legajo: " + legajo.getValor() + ", Promedio: " + promedio.getValor();
     }
 }

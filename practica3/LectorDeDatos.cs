@@ -6,7 +6,12 @@ public class LectorDeDatos
 
     public int numeroPorTeclado()
     {
-        return int.Parse(Console.ReadLine());
+        string a = Console.ReadLine();
+        if (a == null)
+        {
+            return 0;
+        }
+        return int.Parse(a);
     }
 
     public string stringPorTeclado()
