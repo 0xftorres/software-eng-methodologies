@@ -1,30 +1,34 @@
 ﻿namespace practica4;
 
-// Ejercicio 7: Habría que crear una fábrica de
-// coleccionables, y una fabrica para cada
-// coleccionable mencionado (Pila, cola, etc.)
-
-// Ejercicio 10: Habría que crear una fabrica de Personas.
 
 class Program
 {
     public static void Main(string[] args)
     {
-        Pila p = new Pila();
+        Teacher t = new Teacher();
 
-        //llenar(p, "alumno");
-        //informar(p, "alumno");
+        Cola c = new Cola();
+        llenar(c, "alumno");
 
-        llenar(p, "profesor");
-        informar(p, "profesor");
-        
-        Profesor profesor = new Profesor("Fede", 12348775, 15);
-        for(int i = 1; i <= 20; i++)
+        // los 10 primeros son estudiosos
+        for (int i=0; i<10; i++)
         {
-            Alumno alumno = (Alumno)FabricaDeComparables.crearAleatorio("alumno");
-            profesor.agregarObservador(alumno);
+            Alumno e = (Alumno)c.desencolar();
+            AlumnoMuyEstudioso a = new AlumnoMuyEstudioso(e.getNombre().getValor(), e.getDni().getValor(), e.getLegajo().getValor(), e.getPromedio().getValor());
+            c.encolar(a);
         }
-        dictadoDeClases(profesor);
+
+        // adaptar a StudentAdapter
+        IIterador iterador = ((IIterable)c).CrearIterador();
+        while(!iterador.fin()){
+            Alumno a = (Alumno)iterador.actual();
+			StudentAdapter alumno_adaptado = new StudentAdapter(a);
+            t.goToClass(alumno_adaptado);
+			iterador.siguiente();
+		}
+
+        t.teachingAClass();
+
     }
 
     public static void dictadoDeClases(Profesor profesor)
