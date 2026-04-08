@@ -1,4 +1,4 @@
-﻿namespace practica3;
+﻿namespace practica4;
 
 // Ejercicio 7: Habría que crear una fábrica de
 // coleccionables, y una fabrica para cada

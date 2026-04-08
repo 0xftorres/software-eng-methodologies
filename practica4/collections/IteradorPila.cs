@@ -1,4 +1,4 @@
-namespace practica3;
+namespace practica4;
 
 public class IteradorPila : IIterador
 {
