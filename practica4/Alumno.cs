@@ -1,6 +1,6 @@
 namespace practica4;
 
-public class Alumno: Persona, IObservador
+public class Alumno: Persona, IObservador, IAlumno
 {
     public Numero legajo;
     public Numero promedio;
@@ -19,6 +19,11 @@ public class Alumno: Persona, IObservador
         estrategia = new ComparacionPorDni(dni.getValor());
     }
 
+    public string mostrarCalificacion()
+    {
+        return nombre.getValor() + "        " + calificacion.getValor();
+    }
+
     public virtual int responderPregunta(int pregunta)
     {
         Random rand = new Random();
@@ -27,10 +32,6 @@ public class Alumno: Persona, IObservador
         return respuesta;
     }
 
-    public string mostrarCalificacion()
-    {
-        return "Alumno" + nombre.getValor() + " (legajo: " + legajo.getValor() + "): " + calificacion.getValor();
-    }
 
     public void actualizar(IObservado o)
     {
@@ -83,7 +84,13 @@ public class Alumno: Persona, IObservador
 
     public override string ToString()
     {
-        return "Nombre: " + nombre.getValor() + ", DNI: " + dni.getValor() + ", Legajo: " + legajo.getValor() + ", Promedio: " + promedio.getValor();
+        //return "Nombre: " + nombre.getValor() + ", DNI: " + dni.getValor() + ", Legajo: " + legajo.getValor() + ", Promedio: " + promedio.getValor() + ", Calificacion: " + calificacion.getValor();
+
+        ImprimirLegajoDecorator im_legajo = new ImprimirLegajoDecorator(this);
+        ImprimirNotaDecorator im_nota = new ImprimirNotaDecorator(im_legajo);
+        ImprimirAprobacionDecorator im_aprobacion = new ImprimirAprobacionDecorator(im_nota);
+        ImprimirCuadroDecorator im_cuadro = new ImprimirCuadroDecorator(im_aprobacion);
+        return im_cuadro.mostrarCalificacion();
     }
 
     public void setCalificacion(Numero c)

@@ -29,6 +29,9 @@ class Program
 
         t.teachingAClass();
 
+
+
+
     }
 
     public static void dictadoDeClases(Profesor profesor)

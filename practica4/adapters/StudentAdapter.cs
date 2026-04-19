@@ -26,7 +26,7 @@ public class StudentAdapter : Student
 
     public string showResult()
     {
-        return alumno.ToString() + ", Calificacion: " + alumno.getCalificacion().getValor();
+        return alumno.ToString();
     }
 
     public bool equals(Student student)
