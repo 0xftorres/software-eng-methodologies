@@ -16,6 +16,7 @@ public class AlumnoProxy : Persona, IAlumno
         legajo = new Numero(l);
         promedio = new Numero(p);
         calificacion = new Numero(0);
+        esEstudioso = muyEstudioso;
 
         // Por default es por DNI
         estrategia = new ComparacionPorDni(dni.getValor());

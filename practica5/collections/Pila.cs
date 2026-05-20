@@ -2,9 +2,13 @@ namespace practica5;
 
 using System.Collections.Generic;
 
-public class Pila : IColeccionable, IIterable
+public class Pila : IColeccionable, IIterable, IOrdenable
 {
     private List<IComparable> datos = new List<IComparable>();
+
+    private IOrdenEnAula1? ordenInicio;
+    private IOrdenEnAula2? ordenLlegaAlumno;
+    private IOrdenEnAula1? ordenAulaLlena;
 
     public IIterador CrearIterador()
     {
@@ -80,7 +84,22 @@ public class Pila : IColeccionable, IIterable
 
     public void agregar(IComparable c)
     {
+        if (this.cuantos() == 0 && ordenInicio != null)
+        {
+            ordenInicio.ejecutar();
+        }
+        
         this.apilar(c);
+
+        if (ordenLlegaAlumno != null)
+        {
+            ordenLlegaAlumno.ejecutar(c);
+        }
+
+        if (this.cuantos() == 40 && ordenAulaLlena != null)
+        {
+            ordenAulaLlena.ejecutar();
+        }
     }
 
     public bool contiene(IComparable c)
@@ -93,5 +112,20 @@ public class Pila : IColeccionable, IIterable
             }
         }
         return false;
+    }
+
+    public void setOrdenInicio(IOrdenEnAula1 orden)
+    {
+        this.ordenInicio = orden;
+    }
+
+    public void setOrdenLlegaAlumno(IOrdenEnAula2 orden)
+    {
+        this.ordenLlegaAlumno = orden;
+    }
+
+    public void setOrdenAulaLlena(IOrdenEnAula1 orden)
+    {
+        this.ordenAulaLlena = orden;
     }
 }

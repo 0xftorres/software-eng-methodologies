@@ -5,7 +5,13 @@ class Program
 {
     public static void Main(string[] args)
     {
+        /*
         Teacher t = new Teacher();
+
+        Aula aula = new Aula();
+
+        IOrdenEnAula1 ordenInicio = new OrdenInicio(aula);
+        ordenInicio.ejecutar();
 
         Cola c = new Cola();
         llenar(c, "alumno");
@@ -25,20 +31,35 @@ class Program
             c.encolar(a);
         }
 
+        IOrdenEnAula2 ordenLlega = new OrdenLlegaAlumno(aula);
+
         // adaptar a StudentAdapter
         IIterador iterador = ((IIterable)c).CrearIterador();
         while(!iterador.fin()){
             IAlumno a = (IAlumno)iterador.actual();
 			StudentAdapter alumno_adaptado = new StudentAdapter(a);
             t.goToClass(alumno_adaptado);
+            ordenLlega.ejecutar((IComparable)a);
 			iterador.siguiente();
 		}
 
-        t.teachingAClass();
+        IOrdenEnAula1 ordenLlena = new OrdenAulaLlena(aula);
+        ordenLlena.ejecutar();
 
+        t.teachingAClass();*/
 
+        Aula aula1 = new Aula();
+        Pila pila = new Pila();
 
+        pila.setOrdenInicio(new OrdenInicio(aula1));
+        pila.setOrdenLlegaAlumno(new OrdenLlegaAlumno(aula1));
+        pila.setOrdenAulaLlena(new OrdenAulaLlena(aula1));
 
+        // alumnos
+        llenar(pila, "alumno");
+
+        // estudiosos
+        llenar(pila, "estudioso");
     }
 
     public static void dictadoDeClases(Profesor profesor)

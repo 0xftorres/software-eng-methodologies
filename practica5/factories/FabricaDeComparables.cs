@@ -16,6 +16,8 @@ public abstract class FabricaDeComparables
             fab = new FabricaDeNumeros();
         } else if (tipo == "profesor") {
             fab = new FabricaDeProfesores();
+        } else if (tipo == "estudioso") {
+            fab = new FabricaDeEstudiosos();
         } else {
             return null;
         }
@@ -40,6 +42,8 @@ public abstract class FabricaDeComparables
             fab = new FabricaDeNumeros();
         } else if (tipo == "profesor") {
             fab = new FabricaDeProfesores();
+        } else if (tipo == "estudioso") {
+            fab = new FabricaDeEstudiosos();
         } else {
             return null;
         }
