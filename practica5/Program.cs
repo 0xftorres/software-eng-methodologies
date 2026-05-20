@@ -13,15 +13,22 @@ class Program
         // los 10 primeros son estudiosos
         for (int i=0; i<10; i++)
         {
-            Alumno e = (Alumno)c.desencolar();
-            AlumnoMuyEstudioso a = new AlumnoMuyEstudioso(e.getNombre().getValor(), e.getDni().getValor(), e.getLegajo().getValor(), e.getPromedio().getValor());
+            IAlumno e = (IAlumno)c.desencolar();
+            Persona p = (Persona)e;
+
+            AlumnoMuyEstudioso a = new AlumnoMuyEstudioso(
+                p.getNombre().getValor(),
+                (int)p.getDNI().getValor(),
+                (int)e.getLegajo().getValor(),
+                0
+            );
             c.encolar(a);
         }
 
         // adaptar a StudentAdapter
         IIterador iterador = ((IIterable)c).CrearIterador();
         while(!iterador.fin()){
-            Alumno a = (Alumno)iterador.actual();
+            IAlumno a = (IAlumno)iterador.actual();
 			StudentAdapter alumno_adaptado = new StudentAdapter(a);
             t.goToClass(alumno_adaptado);
 			iterador.siguiente();

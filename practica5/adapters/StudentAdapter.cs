@@ -2,9 +2,9 @@ namespace practica5;
 
 public class StudentAdapter : Student
 {
-    private Alumno alumno;
+    private IAlumno alumno;
 
-    public StudentAdapter(Alumno a)
+    public StudentAdapter(IAlumno a)
     {
         alumno = a;
     }
@@ -32,18 +32,18 @@ public class StudentAdapter : Student
     public bool equals(Student student)
     {
         StudentAdapter other = (StudentAdapter)student;
-        return alumno.sosIgual(other.alumno);
+        return ((IComparable)this.alumno).sosIgual((IComparable)other.alumno);
     }
 
     public bool lessThan(Student student)
     {
         StudentAdapter other = (StudentAdapter)student;
-        return alumno.sosMenor(other.alumno);
+        return ((IComparable)this.alumno).sosMenor((IComparable)other.alumno);
     }
 
     public bool greaterThan(Student student)
     {
         StudentAdapter other = (StudentAdapter)student;
-        return alumno.sosMayor(other.alumno);
+        return ((IComparable)this.alumno).sosMayor((IComparable)other.alumno);
     }
 }

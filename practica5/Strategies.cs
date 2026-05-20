@@ -66,19 +66,19 @@ public class ComparacionPorDni : IComparable
 
     public bool sosIgual(IComparable c)
     {
-        Alumno otro_alumno = (Alumno)c;
+        Persona otro_alumno = (Persona)c;
         return dni.getValor() == otro_alumno.getDNI().getValor();
     }
 
     public bool sosMayor(IComparable c)
     {
-        Alumno otro_alumno = (Alumno)c;
+        Persona otro_alumno = (Persona)c;
         return dni.getValor() > otro_alumno.getDNI().getValor();
     }
 
     public bool sosMenor(IComparable c)
     {
-        Alumno otro_alumno = (Alumno)c;
+        Persona otro_alumno = (Persona)c;
         return dni.getValor() < otro_alumno.getDNI().getValor();
     }
 }

@@ -13,8 +13,7 @@ public class FabricaDeAlumnos: FabricaDeComparables
         Numero legajo_alumno = (Numero)gen.numeroAleatorio(9999);
         Numero promedio_alumno = (Numero)gen.numeroAleatorio(10);
 
-        IComparable al = new Alumno(nombre_alumno.getValor(), dni_alumno.getValor(), legajo_alumno.getValor(), promedio_alumno.getValor());
-        return al;
+        return new AlumnoProxy(nombre_alumno.getValor(), dni_alumno.getValor(), legajo_alumno.getValor(), promedio_alumno.getValor(), false);
     }
 
     public override IComparable crearPorTeclado()
@@ -33,7 +32,6 @@ public class FabricaDeAlumnos: FabricaDeComparables
         Console.WriteLine("Ingrese el promedio del alumno:");
         int promedio_alumno = lector.numeroPorTeclado();
 
-        IComparable a = new Alumno(nombre_alumno, dni_alumno, legajo_alumno, promedio_alumno);
-        return a;
+        return new AlumnoProxy(nombre_alumno, dni_alumno, legajo_alumno, promedio_alumno, false);
     }
 }

@@ -23,4 +23,19 @@ public abstract class AlumnoDecorator : IAlumno
     {
         return alumno.getLegajo();
     }
+
+    public virtual Cadena getNombre()
+    {
+        return alumno.getNombre();
+    }
+
+    public virtual int responderPregunta(int pregunta)
+    {
+        return this.alumno.responderPregunta(pregunta);
+    }
+
+    public virtual void setCalificacion(Numero c)
+    {
+        this.alumno.setCalificacion(c);
+    }
 }

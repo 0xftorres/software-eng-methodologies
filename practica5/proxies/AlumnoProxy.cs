@@ -1,15 +1,17 @@
 namespace practica5;
 
-public class Alumno: Persona, IObservador, IAlumno
+public class AlumnoProxy : Persona, IAlumno
 {
     public Numero legajo;
     public Numero promedio;
     public IComparable estrategia;
     public Numero calificacion;
+    public bool esEstudioso;
 
-    public Alumno(string n, int d, int l, int p): base(n,d)
+    private Alumno? alumnoReal = null;
+
+    public AlumnoProxy(string n, int d, int l, int p, bool muyEstudioso): base(n, d)
     {
-        nombre = new Cadena(n);
         dni = new Numero(d);
         legajo = new Numero(l);
         promedio = new Numero(p);
@@ -21,17 +23,26 @@ public class Alumno: Persona, IObservador, IAlumno
 
     public string mostrarCalificacion()
     {
-        return nombre.getValor() + "        " + calificacion.getValor();
+        return this.nombre.getValor() + "        " + this.calificacion.getValor();
     }
 
-    public virtual int responderPregunta(int pregunta)
+    public int responderPregunta(int pregunta)
     {
-        Random rand = new Random();
-        int respuesta = rand.Next(1, 3);
+        if (alumnoReal == null)
+        {
+            Console.WriteLine("        --(Esto e un proxy)--");
+            if (esEstudioso)
+            {
+                alumnoReal = new AlumnoMuyEstudioso(nombre.getValor(), dni.getValor(), legajo.getValor(), promedio.getValor());
+            }
+            else
+            {
+                alumnoReal = new Alumno(nombre.getValor(), dni.getValor(), legajo.getValor(), promedio.getValor());
+            }
+        }
 
-        return respuesta;
+        return alumnoReal.responderPregunta(pregunta);
     }
-
 
     public void actualizar(IObservado o)
     {
@@ -40,7 +51,7 @@ public class Alumno: Persona, IObservador, IAlumno
         {
             prestarAtencion();
         }
-        else if(p.getAccion().getValor() == "escribiendo")
+        else if (p.getAccion().getValor() == "escribiendo")
         {
             distraerse();
         }
@@ -58,7 +69,7 @@ public class Alumno: Persona, IObservador, IAlumno
 
     public void distraerse()
     {
-        string[] distracciones = {"Mirando el celular", "Dibujando en el margen de la carpeta", "Tirando aviones de papel"};
+        string[] distracciones = { "Mirando el celular", "Dibujando en el margen de la carpeta", "Tirando aviones de papel" };
         Random rand = new Random();
         int i = rand.Next(distracciones.Length);
         Console.WriteLine("Alumno {0} (legajo: {1}): {2}", nombre.getValor(), legajo.getValor(), distracciones[i]);
@@ -66,20 +77,22 @@ public class Alumno: Persona, IObservador, IAlumno
 
     public override bool sosIgual(IComparable c)
     {
-        Persona otro_alumno = (Persona)c;
-        return estrategia.sosIgual(otro_alumno);
+        return dni.getValor() == ((Persona)c).getDNI().getValor();
     }
 
     public override bool sosMayor(IComparable c)
     {
-        Persona otro_alumno = (Persona)c;
-        return estrategia.sosMayor(otro_alumno);
+        return dni.getValor() > ((Persona)c).getDNI().getValor();
     }
 
     public override bool sosMenor(IComparable c)
     {
-        Persona otro_alumno = (Persona)c;
-        return estrategia.sosMenor(otro_alumno);
+        return dni.getValor() < ((Persona)c).getDNI().getValor();
+    }
+
+    public void setEsEstudioso(bool estudioso)
+    {
+        esEstudioso = estudioso;
     }
 
     public override string ToString()
@@ -95,7 +108,11 @@ public class Alumno: Persona, IObservador, IAlumno
 
     public void setCalificacion(Numero c)
     {
-        calificacion = c;
+        this.calificacion = c;
+        if (this.alumnoReal != null)
+        {
+            ((Alumno)this.alumnoReal).setCalificacion(c);
+        }
     }
 
     public Numero getCalificacion()
@@ -116,10 +133,5 @@ public class Alumno: Persona, IObservador, IAlumno
     public Numero getPromedio()
     {
         return promedio;
-    }
-
-    public Numero getDni()
-    {
-        return dni;
     }
 }
